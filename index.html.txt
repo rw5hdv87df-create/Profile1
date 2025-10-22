@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nguyễn Anh Tuấn — Profile</title>
+  <meta name="description" content="Profile cá nhân của Nguyễn Anh Tuấn, sinh ngày 26/07/2009" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='52'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #02030A;
+      --fg: #e6ffff;
+      --cyan: #00ffff;
+      --vio: #8a2be2;
+      --glow: 0 0 25px rgba(0,255,255,.45), 0 0 60px rgba(138,43,226,.25);
+      --card-bg: rgba(2,8,20,.48);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, Segoe UI, Inter, Roboto, Arial, sans-serif;
+      overflow: auto;
+    }
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    .shell {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 26px;
+    }
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; gap: 20px; }
+    }
+    .panel {
+      padding: 22px;
+      border-radius: 18px;
+      background: var(--card-bg);
+      backdrop-filter: saturate(150%) blur(12px);
+      box-shadow: var(--glow);
+      transition: .3s;
+    }
+    .panel:hover {
+      box-shadow: 0 0 50px var(--cyan), 0 0 100px var(--vio);
+      transform: scale(1.02);
+    }
+    .head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .avatar {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--cyan);
+      box-shadow: var(--glow);
+      transition: .3s;
+    }
+    .avatar:hover {
+      box-shadow: 0 0 60px var(--cyan), 0 0 100px var(--vio);
+      transform: scale(1.08);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .online {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--vio));
+      box-shadow: 0 0 10px var(--cyan);
+    }
+    .title h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: var(--cyan);
+      text-shadow: 0 0 14px currentColor;
+    }
+    .sub {
+      color: #bfefff;
+      opacity: .9;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 6px;
+    }
+    .badge {
+      font-size: .9rem;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(0,255,255,.35);
+      color: var(--fg);
+    }
+    .bio {
+      margin: 12px 0 16px;
+      color: #dfffff;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .btn {
+      padding: 12px 10px;
+      border-radius: 12px;
+      border: 1.6px solid var(--cyan);
+      background: transparent;
+      color: var(--cyan);
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s transform, color, box-shadow;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      background: radial-gradient(120% 120% at 50% 10%, rgba(0,255,255,.22), rgba(138,43,226,.22));
+      box-shadow: var(--glow);
+      color: #001217;
+    }
+    .section {
+      margin: 4px 0 12px;
+      color: var(--cyan);
+      font-weight: 800;
+      text-shadow: 0 0 10px var(--cyan);
+      position: relative;
+    }
+    .section::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 72px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--vio));
+      border-radius: 2px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .tile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 12px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--fg);
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(0,255,255,.25);
+      transition: .25s all;
+    }
+    .tile:hover {
+      background: radial-gradient(circle at center, rgba(0,255,255,.25), rgba(138,43,226,.2));
+      box-shadow: var(--glow);
+      transform: scale(1.05);
+    }
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #bfefff;
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--cyan), var(--vio));
+      color: #001217;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      display: none;
+      z-index: 5;
+      box-shadow: var(--glow);
+    }
+    #galaxy {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .panel:hover, .avatar:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="galaxy" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="shell">
+      <!-- Hồ sơ -->
+      <section class="panel" aria-label="Hồ sơ">
+        <div class="head">
+          <div class="avatar">
+            <img src="YOUR_AVATAR_URL" alt="Avatar" loading="lazy" />
+            <span class="online" aria-hidden="true"></span>
+          </div>
+          <div class="title">
+            <h1>Nguyễn Anh Tuấn</h1>
+            <div class="sub">Sinh ngày 26/07/2009</div>
+          </div>
+        </div>
+        <div class="badges">
+          <span class="badge">✉ nguyenanhtuanht26@gmail.com</span>
+        </div>
+        <p class="bio">Chào mừng đến với profile của tôi! Tôi là Nguyễn Anh Tuấn, sinh ngày 26/07/2009.</p>
+        <div class="actions">
+          <a class="btn" href="https://www.facebook.com/share/14Qa5PaBghc/?mibextid=wwXIfr" target="_blank" rel="noopener">LIÊN HỆ</a>
+          <button class="btn" id="toggleMusicBtn" aria-pressed="true">🔊 Tắt nhạc</button>
+        </div>
+      </section>
+      <!-- Liên kết & mạng xã hội -->
+      <section class="panel" aria-label="Liên kết & mạng xã hội">
+        <div class="section">Theo dõi nhanh</div>
+        <div class="grid">
+          <a class="tile" href="https://www.facebook.com/share/14Qa5PaBghc/?mibextid=wwXIfr" target="_blank" rel="noopener">📘 <strong>Facebook</strong></a>
+          <a class="tile" href="#" id="copyMail">📎 <strong>Copy Email</strong></a>
+        </div>
+        <div class="footer">© 2025 • Nguyễn Anh Tuấn</div>
+      </section>
+    </div>
+  </div>
+  <div class="toast" id="toast">Đã copy!</div>
+  <audio id="backgroundAudio" loop preload="auto" style="display:none">
+    <source src="YOUR_AUDIO_URL.mp3" type="audio/mpeg" />
+  </audio>
+  <script>
+    // Music toggle
+    const audio = document.getElementById('backgroundAudio');
+    const btn = document.getElementById('toggleMusicBtn');
+    (async () => {
+      try { await audio.play(); } catch { btn.textContent = '🔈 Bật nhạc'; }
+    })();
+    btn.addEventListener('click', async () => {
+      if (audio.paused) { await audio.play(); btn.textContent = '🔊 Tắt nhạc'; }
+      else { audio.pause(); btn.textContent = '🔈 Bật nhạc'; }
+    });
+
+    // Toast + copy
+    const toast = document.getElementById('toast');
+    function showToast(text) {
+      toast.textContent = text;
+      toast.style.display = 'block';
+      clearTimeout(showToast.t);
+      showToast.t = setTimeout(() => toast.style.display = 'none', 1500);
+    }
+    function safeCopy(t) {
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(t).then(() => showToast('Đã copy!'));
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = t;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        showToast('Đã copy!');
+      }
+    }
+    document.getElementById('copyMail').addEventListener('click', (e) => {
+      e.preventDefault();
+      safeCopy('nguyenanhtuanht26@gmail.com');
+    });
+
+    // Galaxy background
+    const cvs = document.getElementById('galaxy'), ctx = cvs.getContext('2d');
+    let W, H, stars = [], meteors = [];
+    function size() { W = cvs.width = innerWidth; H = cvs.height = innerHeight; }
+    function makeStars(n) {
+      stars = Array.from({ length: n }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.5 + .2,
+        v: Math.random() * 0.25 + .08
+      }));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      const grd = ctx.createRadialGradient(W * .7, H * .3, 0, W * .7, H * .3, Math.max(W, H) * .8);
+      grd.addColorStop(0, 'rgba(0,255,255,.06)');
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#fff';
+      for (const s of stars) {
+        s.y += s.v;
+        if (s.y > H) { s.y = 0; s.x = Math.random() * W; }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--cyan');
+      ctx.lineWidth = 1.6;
+      for (let i = meteors.length; i--;) {
+        const m = meteors[i];
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(m.x - m.l * .6, m.y + m.l);
+        ctx.stroke();
+        m.x += m.v * .35;
+        m.y += m.v;
+        if (m.y > H) meteors.splice(i, 1);
+      }
+      if (Math.random() < 0.015) meteors.push({ x: Math.random() * W, y: 0, l: Math.random() * 90 + 40, v: Math.random() * 4 + 5 });
+      requestAnimationFrame(draw);
+    }
+    addEventListener('resize', () => { size(); makeStars(280); });
+    size();
+    makeStars(280);
+    draw();
+  </script>
+</body>
+</html>
